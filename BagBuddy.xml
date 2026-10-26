@@ -1,0 +1,285 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+http://wowprogramming.com/FrameXML/UI.xsd">
+
+  <Button name="BagBuddy_Icon" parent="Minimap" frameStrata="MEDIUM" frameLevel="8">
+    <Size x="32" y="32" />
+    <Anchors>
+      <Anchor point="TOPLEFT"/>
+    </Anchors>
+    <Layers>
+      <Layer level="ARTWORK">
+        <Texture name="$parent_Texture" file="Interface\ICONS\INV_Misc_bag_08">
+          <Size x="20" y="20" />
+          <Anchors>
+            <Anchor point="CENTER"/>
+          </Anchors>
+        </Texture>
+      </Layer>
+      <Layer level="OVERLAY">
+        <Texture name="$parent_Border" file="Interface\Minimap\MiniMap-TrackingBorder">
+          <Size x="52" y="52" />
+          <Anchors>
+            <Anchor point="TOPLEFT"/>
+          </Anchors>
+        </Texture>
+      </Layer>
+    </Layers>
+
+    <HighlightTexture file="Interface\Minimap\UI-Minimap-ZoomButton-Highlight" alphaMode="ADD"/>
+
+    <!-- Special hover scripts -->
+    <Scripts>
+      <OnLoad>
+        this:RegisterForDrag("RightButton");
+      </OnLoad>
+      <OnDragStart> 
+        this:StartMoving()
+      </OnDragStart> 
+      <OnDragStop>
+        this:StopMovingOrSizing()
+      </OnDragStop>
+    </Scripts>
+
+  </Button>
+
+  <Button name="BagBuddyItemTemplate" virtual="true">
+    <Size>
+      <AbsDimension x="37" y="37"/>
+    </Size>
+    <Layers>
+
+      <!-- Button Icon Texture -->
+      <Layer level="BORDER">
+        <Texture name="$parentIconTexture" parentKey="icon"/>
+          <FontString name="$parentCount" parentKey="count"
+          inherits="NumberFontNormal" justifyH="RIGHT" hidden="true">
+            <Anchors>
+              <Anchor point="BOTTOMRIGHT">
+                <Offset>
+                  <AbsDimension x="-5" y="2"/>
+                </Offset>
+              </Anchor>
+            </Anchors>
+          </FontString>
+      </Layer>
+
+      <!-- Button Border Texture -->
+      <Layer level="OVERLAY">
+        <Texture name="$parentGlow" parentKey="glow" alphaMode="ADD" file="Interface\Buttons\UI-ActionButton-Border">
+          <Size x="70" y="70"/>
+          <Anchors>
+            <Anchor point="CENTER"/>
+          </Anchors>
+          <Color r="1.0" g="1.0" b="1.0" a="0.6"/>
+        </Texture>
+      </Layer>
+
+    </Layers>
+
+    <!-- Relates to `button:SetAttribute("item2", entry.name)` -->
+    <Attributes>
+      <Attribute name="type2" type="string" value="item"/>
+    </Attributes>
+
+    <!-- Special hover scripts -->
+    <Scripts>
+      <OnClick>
+        BagBuddy_Item_OnClick()
+      </OnClick>
+      <OnEnter>
+        BagBuddy_Button_OnEnter(this, motion)
+      </OnEnter>
+      <OnLeave>
+        BagBuddy_Button_OnLeave(this, motion)
+      </OnLeave>
+    </Scripts>
+
+    <!-- Button States -->
+    <NormalTexture name="$parentNormalTexture" file="Interface\Buttons\UI-Quickslot2">
+      <Size>
+        <AbsDimension x="64" y="64"/>
+      </Size>
+      <Anchors>
+        <Anchor point="CENTER">
+          <Offset>
+            <AbsDimension x="0" y="-1"/>
+          </Offset>
+        </Anchor>
+      </Anchors>
+    </NormalTexture>
+
+    <PushedTexture file="Interface\Buttons\UI-Quickslot-Depress"/>
+    <HighlightTexture file="Interface\Buttons\ButtonHilight-Square"
+    alphaMode="ADD"/>
+
+  </Button>
+
+  <CheckButton name="BagBuddyFilterTemplate" inherits="BagBuddyItemTemplate" virtual="true">
+    <Scripts>
+      <OnEnter>
+        BagBuddy_Filter_OnEnter(this, motion)
+      </OnEnter>
+      <OnLeave>
+        BagBuddy_Filter_OnLeave(this, motion)
+      </OnLeave>
+      <OnClick>
+        BagBuddy_Filter_OnClick(this, motion)
+      </OnClick>
+    </Scripts>
+    <CheckedTexture file="Interface\Buttons\CheckButtonHilight" alphaMode="ADD"/>
+  </CheckButton>
+
+  <Frame name="BagBuddy" parent="UIParent" hidden="true">
+
+    <Size x="384" y="512"/>
+    <Anchors>
+      <Anchor point="CENTER" relativePoint="CENTER" relativeTo="UIParent"/>
+    </Anchors>
+
+    <Scripts>
+      <OnEvent>
+        BagBuddy_OnEvent()
+      </OnEvent> 
+      <OnEscapePressed>
+        this:Hide()
+      </OnEscapePressed>
+    </Scripts>
+
+    <Frames>
+      <Button name="BagBuddy_PrevButton">
+        <Size x="32" y="32"/>
+        <Anchors>
+          <Anchor point="CENTER" relativeTo="BagBuddy" relativePoint="BOTTOMLEFT">
+            <Offset>
+              <AbsDimension x="50" y="150"/>
+            </Offset>
+          </Anchor>
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            BagBuddy_PrevPage()
+          </OnClick>
+        </Scripts>
+        <NormalTexture file="Interface\Buttons\UI-SpellbookIcon-PrevPage-Up"/>
+        <PushedTexture file="Interface\Buttons\UI-SpellbookIcon-PrevPage-Down" />
+        <DisabledTexture file="Interface\Buttons\UI-SpellbookIcon-PrevPage-Disabled" />
+        <HighlightTexture file="Interface\Buttons\UI-Common-MouseHilight" alphaMode="ADD" />
+      </Button>
+
+      <Button name="BagBuddy_NextButton">
+        <Size x="32" y="32"/>
+        <Anchors>
+          <Anchor point="CENTER" relativeTo="BagBuddy" relativePoint="BOTTOMRIGHT">
+            <Offset>
+              <AbsDimension x="-70" y="150"/>
+            </Offset>
+          </Anchor>
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            BagBuddy_NextPage()
+          </OnClick>
+        </Scripts>
+        <NormalTexture file="Interface\Buttons\UI-SpellbookIcon-NextPage-Up"/>
+        <PushedTexture file="Interface\Buttons\UI-SpellbookIcon-NextPage-Down" />
+        <DisabledTexture file="Interface\Buttons\UI-SpellbookIcon-NextPage-Disabled" />
+        <HighlightTexture file="Interface\Buttons\UI-Common-MouseHilight" alphaMode="ADD" />
+      </Button>
+
+      <EditBox name="$parent_Input" autoFocus="false">
+        <Size x="400" y="20"/>
+        <Anchors>
+          <Anchor point="BOTTOMLEFT">
+            <Offset x="32" y="100"/>
+          </Anchor>
+        </Anchors>
+
+        <Scripts>
+          <OnEscapePressed>this:ClearFocus()</OnEscapePressed>
+          <OnTextChanged>BagBuddy_Update()</OnTextChanged>
+        </Scripts>
+        
+        <FontString inherits="GameFontHighlight"/>
+      </EditBox>
+    </Frames>
+
+    <Layers>
+      <Layer level="BACKGROUND">
+        <Texture name="$parent_Portrait" parentKey="portrait">
+          <Size x="60" y="60"/>
+          <Anchors>
+            <Anchor point="TOPLEFT">
+              <Offset x="7" y="-6"></Offset>
+            </Anchor>
+          </Anchors>
+        </Texture>
+      </Layer>
+
+      <!-- All text related to BagBuddy's main frame -->
+      <Layer level="OVERLAY">
+        <FontString name="$parent_TITLE" inherits="GameFontNormal" text="BagBuddy">
+          <Anchors>
+            <Anchor point="TOP">
+              <Offset x="0" y="-18"/>
+            </Anchor>
+          </Anchors>
+        </FontString>
+
+        <FontString name="$parent_ItemsCount" inherits="GameFontNormal">
+          <Anchors>
+            <Anchor point="TOPLEFT" relativePoint="TOPLEFT">
+              <Offset x="73" y="-50"/>
+            </Anchor>
+          </Anchors>
+        </FontString>
+
+        <FontString name="$parent_Status" inherits="GameFontHighlight">
+          <Anchors>
+            <Anchor point="CENTER" relativePoint="BOTTOM">
+              <Offset x="-10" y="150"/>
+            </Anchor>
+          </Anchors>
+        </FontString>
+
+        <FontString name="$parent_Placeholder" inherits="GameFontHighlight" text="Search by name...">
+          <Anchors>
+            <Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT">
+              <Offset x="28" y="104"/>
+            </Anchor>
+          </Anchors>
+        </FontString>
+      </Layer>
+
+      <Layer level="BORDER">
+        <Texture file="Interface\BankFrame\UI-BankFrame-TopLeft">
+          <Anchors>
+            <Anchor point="TOPLEFT"/>
+          </Anchors>
+        </Texture>
+
+        <Texture file="Interface\BankFrame\UI-BankFrame-TopRight">
+          <Anchors>
+            <Anchor point="TOPRIGHT"/>
+          </Anchors>
+        </Texture>
+
+        <Texture file="Interface\BankFrame\UI-BankFrame-BotLeft">
+          <Anchors>
+            <Anchor point="BOTTOMLEFT"/>
+          </Anchors>
+        </Texture>
+
+        <Texture file="Interface\BankFrame\UI-BankFrame-BotRight">
+          <Anchors>
+            <Anchor point="BOTTOMRIGHT"/>
+          </Anchors>
+        </Texture>
+
+      </Layer>
+    </Layers>
+
+  </Frame>
+
+</Ui>

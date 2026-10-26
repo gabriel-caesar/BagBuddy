@@ -1,0 +1,7 @@
+## Interface: 11200
+## Title: BagBuddy
+## SavedVariablesPerCharacter: BagBuddy_itemTimes
+## Notes: A handy helper that allows you to filter your inventory.
+
+BagBuddy.xml
+BagBuddy.lua
