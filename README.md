@@ -1,25 +1,48 @@
+<div align="center">
+
 # BagBuddy 1.12.1
-### This AddOn helps filter and search for items in your bag.
-It was created originally by James Whitehead II and Rick Roe which were the writers for the World of Warcraft Programming book, where youc can find the step-by-step guide in how to build the same AddOn yourself.
 
-Even though you can follow the tutorial to build the AddOn yourself, if you are not using a certain client version some workarounds need to be done, since the writers assume you are developing under the 3.3.5a World of Warcraft client version. In my case, I had to adapt to it to the 1.12.1 version, which can serve others well if they want to accomplish the same thing.
+**Filter and search for items in your bag.**
 
-### Main Panel:
-![image_alt](https://github.com/gabriel-caesar/BagBuddy/blob/726ad794b3351a2159ccd92748025a12fc79bdfa/Images/bb_1_img.png)
+![WoW Client](https://img.shields.io/badge/WoW%20Client-1.12.1-blue)
+![Language](https://img.shields.io/badge/Language-Lua%20%2F%20XML-lightgrey)
 
-### Search by name:
-![image_alt](https://github.com/gabriel-caesar/BagBuddy/blob/726ad794b3351a2159ccd92748025a12fc79bdfa/Images/bb_2_img.png)
+</div>
 
-### Filter by quality:
-![iamge_alt](https://github.com/gabriel-caesar/BagBuddy/blob/726ad794b3351a2159ccd92748025a12fc79bdfa/Images/bb_3_img.png)
+---
 
-### Sources
-https://protokolo7.neocities.org/lua/WoW_Addons.pdf
-BagBuddy tutorial can be followed from chapter 9 (page 143) all the way to chapter 14 (page 265).
+## About
 
-### Special thanks to:
+BagBuddy was originally created by **James Whitehead II** and **Rick Roe**, the authors of the *World of Warcraft Programming* book, which includes a step-by-step guide to building this AddOn yourself.
+
+The tutorial assumes you're developing on the **3.3.5a** client. If you're on a different client version, some workarounds are needed. This version is adapted to **1.12.1**, which should help anyone trying to do the same.
+
+## Features
+
+- Search items in your bag by name
+- Filter items by quality
+
+## Screenshots
+
+### Main Panel
+<img src="Images/bb_1_img.png" alt="BagBuddy main panel" width="600">
+
+### Search by Name
+<img src="Images/bb_2_img.png" alt="Searching items by name" width="600">
+
+### Filter by Quality
+<img src="Images/bb_3_img.png" alt="Filtering items by quality" width="600">
+
+## Sources
+
+- [World of Warcraft Programming (PDF)](https://protokolo7.neocities.org/lua/WoW_Addons.pdf)
+- The BagBuddy tutorial runs from chapter 9 (page 143) through chapter 14 (page 265).
+
+## Special Thanks
+
 - James Whitehead II
 - Rick Roe
 
-### Support their work
-https://www.amazon.com/dp/B0011UCOHK?lv=shuf&language=zh_TW&channelId=500&plpRedirect=mhFallback
+## Support Their Work
+
+If you find the book useful, consider [buying a copy on Amazon](https://www.amazon.com/dp/B0011UCOHK).
